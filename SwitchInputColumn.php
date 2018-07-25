@@ -42,6 +42,11 @@ class SwitchInputColumn extends DataColumn
     /** @var array */
     public $pluginEvents = [];
 
+    /**
+     * @var array
+     */
+    public $dataAttributes = [];
+
     protected function renderDataCellContent($model, $key, $index): string
     {
         $value = $this->value;
@@ -54,7 +59,7 @@ class SwitchInputColumn extends DataColumn
                     'checked' => false,
 //                    'class' => 'js-switch-input',
                 ],
-                'value' => is_callable($value) ? $value($model) : $value,
+                'value' => $this->getValue($value, $model),
                 'disabled' => $this->disabled,
                 'pluginOptions' => [
                     'size' => $this->size,
@@ -64,6 +69,10 @@ class SwitchInputColumn extends DataColumn
                 'pluginEvents' => $this->createPluginEvents($model, $key, $index),
 //                'hashVarLoadPosition' => View::POS_READY, // todo WidgetTrait will need to be investigated
             ];
+            foreach ($this->dataAttributes as $dataName => $dataValue) {
+                $params['options']['data-' . $dataName] = $this->getValue($dataValue, $model);
+            }
+
             if ($this->attribute) {
                 $params['attribute'] = $this->attribute;
             } else {
@@ -81,5 +90,10 @@ class SwitchInputColumn extends DataColumn
         return $this->pluginEvents instanceof \Closure
             ? call_user_func($this->pluginEvents, $model, $key, $index)
             : $this->pluginEvents;
+    }
+
+    private function getValue($value, $model)
+    {
+        return is_callable($value) ? $value($model) : $value;
     }
 }

@@ -4,6 +4,7 @@ namespace nikolaykovenko\switchinput;
 
 use kartik\widgets\SwitchInput;
 use yii\grid\DataColumn;
+use yii\helpers\ArrayHelper;
 
 class SwitchInputColumn extends DataColumn
 {
@@ -41,11 +42,41 @@ class SwitchInputColumn extends DataColumn
     public $name;
     /** @var array */
     public $pluginEvents = [];
+    /**
+     * @var array List of value => name pairs
+     */
+    public $enum = [];
+    /**
+     * @var bool
+     */
+    public $loadFilterDefaultValues = true;
 
     /**
      * @var array
      */
     public $dataAttributes = [];
+
+    /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        if ($this->loadFilterDefaultValues && $this->filter === null) {
+            $this->filter = $this->enum;
+        }
+    }
+
+    /**
+     * @param mixed $model
+     * @param mixed $key
+     * @param int $index
+     * @return mixed
+     */
+    public function getDataCellValue($model, $key, $index)
+    {
+        $value = parent::getDataCellValue($model, $key, $index);
+        return ArrayHelper::getValue($this->enum, $value, $value);
+    }
 
     protected function renderDataCellContent($model, $key, $index): string
     {
@@ -72,12 +103,8 @@ class SwitchInputColumn extends DataColumn
             foreach ($this->dataAttributes as $dataName => $dataValue) {
                 $params['options']['data-' . $dataName] = $this->getValue($dataValue, $model);
             }
+            $params['name'] = $this->name;
 
-            if ($this->attribute) {
-                $params['attribute'] = $this->attribute;
-            } else {
-                $params['name'] = $this->name;
-            }
             $switch = SwitchInput::widget($params);
         } catch (\Exception $e) {
             $switch = $e->getMessage();

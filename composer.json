@@ -18,8 +18,8 @@
   "license": "BSD-3-Clause",
   "authors": [
     {
-      "name": "Nikolay Kovenko",
-      "email": "nikolay.kovenko@gmail.com"
+      "name": "Nikolay Kovenko2",
+      "email": "nikolay.kovenko2@gmail.com"
     }
   ],
   "require": {
@@ -29,7 +29,7 @@
   "minimum-stability": "stable",
   "autoload": {
     "psr-4": {
-      "nikolaykovenko\\switchinput\\": ""
+      "gingernata\\switchinput\\": ""
     }
   }
 }

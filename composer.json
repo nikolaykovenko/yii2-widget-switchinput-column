@@ -1,5 +1,5 @@
 {
-  "name": "nikolaykovenko/yii2-widget-switchinput-column",
+  "name": "gingernata/yii2-widget-switchinput-column",
   "description": "A Yii2 wrapper widget for the Bootstrap Switch plugin to use checkboxes & radios as toggle switchinputes in grid views",
   "keywords": [
     "yii2",
@@ -13,13 +13,13 @@
     "jquery",
     "plugin"
   ],
-  "homepage": "https://github.com/nikolaykovenko/yii2-widget-switchinput-column",
+  "homepage": "https://github.com/gingernata/yii2-widget-switchinput-column",
   "type": "yii2-extension",
   "license": "BSD-3-Clause",
   "authors": [
     {
-      "name": "Nikolay Kovenko",
-      "email": "nikolay.kovenko@gmail.com"
+      "name": "Nikolay Kovenko2",
+      "email": "nikolay.kovenko2@gmail.com"
     }
   ],
   "require": {

@@ -1,6 +1,6 @@
 <?php
 
-namespace gingernata\switchinput;
+namespace nikolaykovenko\switchinput;
 
 use kartik\widgets\SwitchInput;
 use yii\grid\DataColumn;

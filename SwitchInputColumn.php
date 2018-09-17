@@ -41,6 +41,10 @@ class SwitchInputColumn extends DataColumn
     public $name;
     /** @var array */
     public $pluginEvents = [];
+    /**
+     * @var array List of value => name pairs
+     */
+    public $enum = [];
 
     /**
      * @var array
@@ -72,12 +76,8 @@ class SwitchInputColumn extends DataColumn
             foreach ($this->dataAttributes as $dataName => $dataValue) {
                 $params['options']['data-' . $dataName] = $this->getValue($dataValue, $model);
             }
+            $params['name'] = $this->name;
 
-            if ($this->attribute) {
-                $params['attribute'] = $this->attribute;
-            } else {
-                $params['name'] = $this->name;
-            }
             $switch = SwitchInput::widget($params);
         } catch (\Exception $e) {
             $switch = $e->getMessage();
